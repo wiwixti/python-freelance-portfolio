@@ -10,3 +10,9 @@ resource-monitor/monitor_log.csv
 file-organizer/organizer_manifest.json
 csv-report/output/
 
+# Личные материалы, которые не публикуются в GitHub
+FREELANCE_PROFILE.md
+PORTFOLIO.md
+WEEK_PLAN.md
+Руководство по программам Python-портфолио.docx
+
