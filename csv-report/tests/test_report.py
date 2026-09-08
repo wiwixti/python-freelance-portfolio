@@ -29,6 +29,25 @@ class ReportTests(unittest.TestCase):
             self.assertIn("&lt;script&gt;", page)
             self.assertNotIn("<script>", page)
 
+    def test_reads_cp1251_semicolon_csv(self):
+        with tempfile.TemporaryDirectory() as raw:
+            source = Path(raw) / "sales.csv"
+            source.write_bytes("товар;сумма\nРоутер;15980\n".encode("cp1251"))
+
+            headers, rows = report.read_csv(source)
+
+            self.assertEqual(headers, ["товар", "сумма"])
+            self.assertEqual(rows[0]["товар"], "Роутер")
+
+    def test_text_column_has_no_numeric_statistics(self):
+        rows = [{"name": "Alice"}, {"name": "Bob"}, {"name": ""}]
+
+        profile = report.profile_column("name", rows)
+
+        self.assertEqual(profile.kind, "Текст")
+        self.assertEqual(profile.minimum, "—")
+        self.assertEqual(profile.missing, 1)
+
 
 if __name__ == "__main__":
     unittest.main()

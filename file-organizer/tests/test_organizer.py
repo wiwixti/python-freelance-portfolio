@@ -30,6 +30,24 @@ class OrganizerTests(unittest.TestCase):
             self.assertEqual(organizer.undo(manifest), 1)
             self.assertTrue(original.exists())
 
+    def test_existing_destination_gets_unique_name(self):
+        with tempfile.TemporaryDirectory() as raw:
+            folder = Path(raw)
+            (folder / "report.pdf").write_text("new", encoding="utf-8")
+            documents = folder / "Documents"
+            documents.mkdir()
+            (documents / "report.pdf").write_text("old", encoding="utf-8")
+
+            plan = organizer.build_plan(folder, "organizer_manifest.json")
+
+            self.assertEqual(Path(plan[0].destination).name, "report_1.pdf")
+
+    def test_build_plan_rejects_missing_folder(self):
+        with tempfile.TemporaryDirectory() as raw:
+            missing = Path(raw) / "missing"
+            with self.assertRaises(ValueError):
+                organizer.build_plan(missing, "organizer_manifest.json")
+
 
 if __name__ == "__main__":
     unittest.main()
