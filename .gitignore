@@ -1,0 +1,12 @@
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+build/
+dist/
+*.spec
+*.log
+resource-monitor/monitor_log.csv
+file-organizer/organizer_manifest.json
+csv-report/output/
+
