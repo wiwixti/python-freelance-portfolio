@@ -17,9 +17,9 @@
 ```powershell
 git clone <адрес-репозитория>
 cd python-freelance-portfolio
-python resource-monitor/app.py
-python file-organizer/organizer.py --help
-python csv-report/report.py csv-report/demo/sales.csv --output report.html
+py -3 resource-monitor/app.py
+py -3 file-organizer/organizer.py --help
+py -3 csv-report/report.py csv-report/demo/sales.csv --output report.html
 ```
 
 ## Что демонстрирует портфолио
@@ -33,11 +33,10 @@ python csv-report/report.py csv-report/demo/sales.csv --output report.html
 ## Проверка всех проектов
 
 ```powershell
-python -m unittest discover -s file-organizer/tests -v
-python -m unittest discover -s csv-report/tests -v
+py -3 -m unittest discover -s file-organizer/tests -v
+py -3 -m unittest discover -s csv-report/tests -v
 ```
 
 ## Автор
 
 Учебно-практическое портфолио начинающего Python-разработчика. Контакты и ссылки на профили будут добавлены перед публикацией.
-
